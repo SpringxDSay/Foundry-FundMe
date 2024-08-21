@@ -8,7 +8,6 @@ import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
 
 contract FundMeTest is Test {
     FundMe fundMe;
-<<<<<<< HEAD
     address USER = makeAddr("user");
     uint256 constant VALUE_SENT = 0.1 ether;
     uint256 constant STARTING_BALANCE = 10 ether;
@@ -20,14 +19,6 @@ contract FundMeTest is Test {
         _;
     }
 
-=======
-
-    address USER = makeAddr('user');
-    uint256 constant SEND_VALUE = 0.1 ether; // 10000000000000000
-    uint256 constant STARTING_BALANCE = 10 ether;
-    uint256 constant GAS_PRICE = 1;
-
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
     function setUp() external {
         // fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         DeployFundMe deployFundMe = new DeployFundMe();
@@ -35,7 +26,6 @@ contract FundMeTest is Test {
         vm.deal(USER, STARTING_BALANCE);
     }
 
-<<<<<<< HEAD
     function testMinimumUsdIsFive() public view {
         console.log(fundMe.MINIMUM_USD());
         assertEq(fundMe.MINIMUM_USD(), 5e18);
@@ -72,64 +62,12 @@ contract FundMeTest is Test {
     }
 
     function testWithdrawalWithASingleFunder() public funded {
-=======
-    function testMinimumDollarIsFive() public {
-        assertEq(fundMe.MINIMUM_USD(), 5e18);
-    }
-
-    function testOwnerIsMesgSender() public {
-        assertEq(fundMe.getOwner(), msg.sender);
-    }
-
-    function testPriceFeedVersionAccuracy() public {
-        uint256 version = fundMe.getVersion();
-        assertEq(version, 4);
-    }
-
-    function testFundFailsWithoutEnoughEth() public {
-        vm.expectRevert(); // next line should revert
-        fundMe.fund();
-    }
-
-    function testFundUpdatesFundedDataStructure() public{
-        vm.prank(USER);
-        fundMe.fund{value: SEND_VALUE}();
-        uint256 amountFunded = fundMe.getAddressToAmountFunded(USER);
-        assertEq(amountFunded, SEND_VALUE);
-    }
-
-    function testAddsFunderToArrayOfFunders() public {
-        vm.prank(USER);
-        fundMe.fund{value: SEND_VALUE}();
-
-        address funder = fundMe.getFunder(0);
-        assertEq(funder, USER);
-    }
-
-    modifier funded() {
-        vm.prank(USER);
-        fundMe.fund{value: SEND_VALUE}();
-        _;
-    }
-
-    function testOnlyOwnerCanWithdraw() public funded {
-        vm.prank(USER);
-        vm.expectRevert();
-        fundMe.withdraw();
-    }
-
-    function testWithdrawWithASingleFunder() public funded {
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
         // Arrange
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
 
         // Act
-<<<<<<< HEAD
         vm.prank(fundMe.getOwner());
-=======
-        vm.prank(fundMe.getOwner()); // cost: 200
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
         fundMe.withdraw();
 
         // Assert
@@ -139,7 +77,6 @@ contract FundMeTest is Test {
         assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 
-<<<<<<< HEAD
     function testCheaperWithdrawalFromMultipleFunders() public funded {
         // Arrange
         uint160 numberOfFunders = 10;
@@ -148,27 +85,12 @@ contract FundMeTest is Test {
             // prank and deal together is hoax
             hoax(address(i), STARTING_BALANCE);
             fundMe.fund{value: VALUE_SENT}();
-=======
-    function testWithdrawFromMultipleFunders() public funded {
-        // Arrange
-        uint160 numberOfFunders = 10;
-        uint160 startingFunderIndex = 1;
-
-        for(uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
-            // vm.prank new address
-            // vm.deal new address
-            // address()
-            hoax(address(i), SEND_VALUE);
-            // fund the fundMe
-            fundMe.fund{value: SEND_VALUE}();      
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
         }
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
 
         // Act
         vm.startPrank(fundMe.getOwner());
-<<<<<<< HEAD
         fundMe.cheaperWithdraw();
         vm.stopPrank();
 
@@ -185,35 +107,12 @@ contract FundMeTest is Test {
             // prank and deal together is hoax
             hoax(address(i), STARTING_BALANCE);
             fundMe.fund{value: VALUE_SENT}();
-=======
-        fundMe.withdraw();
-        vm.stopPrank();   
-
-        // Assert
-        assert(address(fundMe).balance == 0);
-        assert(startingOwnerBalance + startingFundMeBalance == fundMe.getOwner().balance);
-    }
-
-        function testWithdrawFromMultipleFundersCheaper() public funded {
-        // Arrange
-        uint160 numberOfFunders = 10;
-        uint160 startingFunderIndex = 1;
-
-        for(uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
-            // vm.prank new address
-            // vm.deal new address
-            // address()
-            hoax(address(i), SEND_VALUE);
-            // fund the fundMe
-            fundMe.fund{value: SEND_VALUE}();      
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
         }
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
 
         // Act
         vm.startPrank(fundMe.getOwner());
-<<<<<<< HEAD
         fundMe.withdraw();
         vm.stopPrank();
 
@@ -222,14 +121,3 @@ contract FundMeTest is Test {
         assert(startingFundMeBalance + startingOwnerBalance == fundMe.getOwner().balance);
     }
 }
-=======
-        fundMe.cheaperWithdraw();
-        vm.stopPrank();   
-
-        // Assert
-        assert(address(fundMe).balance == 0);
-        assert(startingOwnerBalance + startingFundMeBalance == fundMe.getOwner().balance);
-    }
-}
-
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d

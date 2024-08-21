@@ -11,13 +11,7 @@ out/
 docs/
 
 # Dotenv file
-<<<<<<< HEAD
 lib
 broadcast/
 .env
-=======
-.env
 
-broadcast/
-lib/
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d

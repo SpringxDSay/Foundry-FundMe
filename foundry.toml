@@ -2,11 +2,5 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-<<<<<<< HEAD
 remappings=["@chainlink/contracts=lib/chainlink-brownie-contracts/contracts"]
-=======
-remappings = ["@chainlink/contracts/=lib/chainlink-brownie-contracts/contracts/"]
-ffi = true
-
->>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
