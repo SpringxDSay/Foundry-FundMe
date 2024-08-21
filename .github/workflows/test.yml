@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 name: CI
 
 on:
   push:
   pull_request:
   workflow_dispatch:
+=======
+name: test
+
+on: workflow_dispatch
+>>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
 
 env:
   FOUNDRY_PROFILE: ci
@@ -25,6 +31,7 @@ jobs:
         with:
           version: nightly
 
+<<<<<<< HEAD
       - name: Show Forge version
         run: |
           forge --version
@@ -36,6 +43,11 @@ jobs:
 
       - name: Run Forge build
         run: |
+=======
+      - name: Run Forge build
+        run: |
+          forge --version
+>>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
           forge build --sizes
         id: build
 

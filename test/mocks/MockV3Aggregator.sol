@@ -71,4 +71,8 @@ contract MockV3Aggregator is AggregatorV3Interface {
     function description() external pure returns (string memory) {
         return "v0.6/test/mock/MockV3Aggregator.sol";
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 11cdca577ffc7178abf8e6dbb96f691248f45a0d
